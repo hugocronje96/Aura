@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Pocket-Sized 4K Camera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; text-align: center; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+        .logo { font-size: 14px; letter-spacing: 4px; color: #666; text-transform: uppercase; margin-bottom: 20px; }
+        h1 { font-size: clamp(3rem, 10vw, 6rem); font-weight: 600; letter-spacing: -3px; margin-bottom: 10px; background: linear-gradient(#fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.2rem; color: #999; margin-bottom: 40px; font-weight: 300; }
+        .product-img { width: 100%; max-width: 450px; margin-bottom: 40px; border-radius: 20px; filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); }
+        .price { font-size: 1.5rem; margin-bottom: 25px; }
+        .price span { text-decoration: line-through; color: #444; margin-right: 10px; }
+        .form-box { display: flex; background: #111; border: 1px solid #333; padding: 5px; border-radius: 50px; width: 100%; max-width: 400px; margin: 0 auto; }
+        input { background: transparent; border: none; color: #fff; padding: 10px 20px; flex: 1; outline: none; font-size: 16px; width: 50%; }
+        button { background: #fff; color: #000; border: none; padding: 12px 25px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #00d4ff; transform: scale(1.05); }
+        #msg { margin-top: 20px; color: #00d4ff; font-size: 0.9rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="logo">Aura Design Lab</div>
+        <h1>Cinematic. Pocket-Sized.</h1>
+        <p class="subtitle">The magnetic 4K camera that snaps to your world.</p>
+        
+        <img src="https://via.placeholder.com/600x400/111111/FFFFFF?text=AURA+4K+CAMERA" class="product-img" alt="Aura Camera">
+        
+        <p class="price"><span>$95</span> Starting at $75</p>
+
+        <div class="form-box" id="form-container">
+            <input type="email" id="email" placeholder="Enter your email">
+            <button onclick="saveEmail()">Reserve</button>
+        </div>
+        <div id="msg"></div>
+    </section>
+
+    <script>
+        function saveEmail() {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value;
+            const msg = document.getElementById('msg');
+            const form = document.getElementById('form-container');
+
+            // --- IMPORTANT: PASTE YOUR URL BELOW ---
+            const scriptURL = 'https://script.google.com/u/0/home/projects/1JWKHasYM6Iopzv0WMMrTJdmlNtqTtHTh5ENq_GwuC9QUgezjBACgRN9k/edit; 
+            // ---------------------------------------
+
+            if (email.includes('@')) {
+                msg.innerHTML = "Processing...";
+                
+                fetch(scriptURL + "?email=" + encodeURIComponent(email), { 
+                    method: 'GET', 
+                    mode: 'no-cors' 
+                })
+                .then(() => {
+                    form.style.display = 'none';
+                    msg.innerHTML = "SUCCESS. You're locked in for the $75 early-bird price.";
+                    msg.style.color = "#00ff88";
+                })
+                .catch(error => {
+                    msg.innerHTML = "Something went wrong. Check your Script URL.";
+                    console.error('Error!', error.message);
+                });
+
+            } else {
+                msg.innerHTML = "Please enter a valid email address.";
+                msg.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
